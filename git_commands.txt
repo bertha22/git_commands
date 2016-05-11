@@ -1,0 +1,60 @@
+pwd:展示当前目录
+ls:当前目录下的所有东西，不包括隐藏文件
+ls -la:显示当前目录下所有，包括隐藏文件
+
+
+working copy-> staging error->repository
+以上过程通过创建文件、add和commit来实现
+
+git init: 创建一个新的git控制的文件夹repository
+
+git add .: 添加所有文件到git更新,.表示所有
+git add 文件名加后缀：仅添加指定文件或更新某些文件
+
+git commit -m “this is the first version”:将本时刻的文件进行保存并提交，必须的一步
+git commit -am “content”：直接将文件提交到“repository”，省略了add的步骤，会将git status中所有修改或untracked的直接提交，不建议直接使用。
+
+git log: 查看所有的commit历史记录
+git log --author="指定名字"：查看团队里某人的操作记录，若名字错误，无记录
+git status:对本文件做了哪些操作，对未commit的，提示是“untracked files”，对已经commit但是有修改并未提交最新的，会提示“no changes added to commit”
+
+git diff: 查看working copy 和 repository中的不同，也就是本地版和提交版的区别（红色代表repository中的，绿色代表自己添加的）
+git diff --staged:查看working copy和 staging error的不同
+
+git rm 文件名加后缀：删除指定文件，从working copy和repository中都删除。但是需要git commit以下，以防万一之后要恢复到此时的状态
+git rm 文件夹名 -r: 删除该文件夹
+
+当自己修改文件名字后，git会认为是删除了原文件，重新创建了新名字的文件，如果不add，那么就不在git控制下，所以真正修改名字的方法是：
+git mv 旧文件名加后缀 新文件名加后缀：直接修改了文件名rename，需要commit保证保留此刻的修改
+
+git mv 旧文件名加后缀 新文件夹/新文件名加后缀
+
+git checkout -- 文件名加后缀：从repository中提取出该文件替换working copy中现有的文件，主要是恢复本地文件
+
+将staging error中的文件返回到working copy，而不去commit：
+git reset HEAD 文件名+后缀：已经add的文件撤回到本地
+
+从repository得到旧的版本：
+1, git log 查看commit的历史记录
+2，git checkout 在log中得到的commit版本号 -- 文件名加后缀： 将该版本中的文件替换到本地种
+
+
+
+无论做了什么操作，最后两步基本上是add再commit
+
+将本地与github连接起来
+1，找到自己在github上的repository地址，比如https://github.com/bertha22/git_tutorials.git
+2，git remote add 在线的repository名字 https://github.com/bertha22/git_tutorials.git
+3，git push -u 在线的repository名字 master
+
+github:
+watch: 提示某个project的更新信息
+star:添加书签
+fork:拷贝某个project到自己的repository
+raw: 查看代码的原始结果
+blame:查看代码不同部分由谁负责
+history：查看历史记录
+issues:类似于任务分配栏，描述任务及类别、承担人等
+
+
+
